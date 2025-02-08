@@ -5,6 +5,11 @@ import pytz
 import threading
 import re
 import logging
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Import classes from python-telegram-bot v21+
 from telegram import Update
@@ -18,8 +23,10 @@ from telegram.ext import (
 )
 
 # -----------------------------------------------------------------------------
-# Configuration: Set your Telegram Bot token here.
-TELEGRAM_BOT_TOKEN = "7819790960:AAFWL20ubWIlVALAs8zRooWUA6yQaqNYWoE"
+# Configuration: Get token from environment variable
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+if not TELEGRAM_BOT_TOKEN:
+    raise ValueError("TELEGRAM_BOT_TOKEN environment variable is not set!")
 # -----------------------------------------------------------------------------
 
 # Global dictionary to track monitoring stop events.
